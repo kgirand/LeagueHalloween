@@ -35,7 +35,7 @@ void setup() {
 }
 
 void draw() {
-  // 5. Call background() with your scary house has an input parameter
+  // 5. Call background() with your scary house as an input parameter
   
   // 6. Call the drawFloor method
   
@@ -60,6 +60,11 @@ void draw() {
 
 void drawFloor(){
   int floorHeight = 30;
+  
+  push();
+  
   fill( 10, 10, 30 );
   rect(0, height - floorHeight, width, floorHeight);
+  
+  pop();
 } //<>//
