@@ -40,16 +40,22 @@ void draw() {
   
   // 6. Call the drawFloor method
   
-  // 7. Call pumpkin1.draw() to draw a pumpkin. Can you make the pumpkin bounce?
-  //    Make at least 2 more new pumpkins.
+  // 7. Call pumpkin1.draw() to draw a pumpkin.
+  //    Can you make the pumpkin bounce?
+  //    Make at least 2 more new pumpkins. To do this, create new pumpkin 
+  //    variables above the setup() method and then initialize them
+  //    in setup(). Call their draw() methods here and they should appear!
 
   // 8. Call ghost1.draw() to draw a ghost.
-  //    Make at least 2 more new ghosts to fly across the screen
+  //    Make at least 2 more new ghosts to fly across the screen.
+  //    To do this, create new ghost variables above the setup() method 
+  //    and then initialize them in setup(). Call their draw() methods here
+  //    and they should appear!
   
   // 9. Call rainfall.draw( <rainColor> ) to add rain
   
   // 10. Call lightning.draw() to draw some lightning;
-  //     Can you make lightning crash when you press the left mouse button?
+  //     Can you make lightning crash when you press a mouse button?
   
   // 11. Display "Happy Halloween" somewhere on your display.
   
