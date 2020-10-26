@@ -5,6 +5,7 @@ public class Lightning {
   float chaos = 0.25;
   ArrayList<PVector> points;
   AudioPlayer thunder = null;
+  boolean lightningFlash = false;
 
   void playThunder() {
     if( canPlaySound ){
@@ -16,6 +17,10 @@ public class Lightning {
        }
     }
   }
+  
+  void setLightningFlash(boolean flash){
+    this.lightningFlash = flash;
+  }
 
   void draw(boolean lightningWhenMousePressed) {
     playThunder();
@@ -23,9 +28,17 @@ public class Lightning {
     if (lightningWhenMousePressed ) {
       if ( mousePressed ) {
         drawLightning();
+        
+        if( this.lightningFlash ){
+          filter(INVERT);
+        }
       }
     } else if( random( 200 ) < 5 ) {
       drawLightning();
+      
+        if( this.lightningFlash ){
+          filter(INVERT);
+        }
     }
   }
 

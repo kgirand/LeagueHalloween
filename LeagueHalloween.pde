@@ -7,6 +7,7 @@ boolean canPlaySound = true;
 
 Lightning lightning = new Lightning();
 Rain rainfall = new Rain();
+Spotlight spotlight = new Spotlight();
 
 // When you get to step 7 you can add new Pumpkins and ghosts below!
 Pumpkin pumpkin1;
@@ -56,6 +57,13 @@ void draw() {
   // Try out the other scary house backgrounds and customize
   // your scary house!
   // ---------------------------------------------------------
+  
+  
+  
+  
+  
+  // There is a hidden spotlight feature in this recipe.
+  // See if you can figure out how to use it....
 }
 
 void drawFloor(){
