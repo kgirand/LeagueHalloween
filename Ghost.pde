@@ -1,9 +1,9 @@
 public class Ghost {
-  PImage ghostImg;
-  String direction;
-  int x;
-  int y;
-  int speed = 5;
+  private PImage ghostImg;
+  private String direction;
+  private int x;
+  private int y;
+  private int speed = 5;
   private int transparency = 125;
 
   public Ghost(int y, int speed, String direction) {
@@ -15,7 +15,7 @@ public class Ghost {
     this.x = -ghostImg.width;
     this.y = y;
   }
-
+  
   public void setGhostTransparency( int transparency ){
     this.transparency = transparency;
   }
