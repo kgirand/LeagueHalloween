@@ -1,9 +1,11 @@
 public class Pumpkin {
   int x;
   int y;
+  int xSpeed = 0;
   int bounceSpeed = 0;
   int gravity = 1;
   int pumpkinColor;
+  int pmpkinSizePixels = 150;
   int glowingEyesColor = color(240 + random(15), 240 + random(15), random(255));
   int greenStemColor = #2EA22C;
 
@@ -11,6 +13,18 @@ public class Pumpkin {
     this.x = x;
     this.y = height - 300;
     this.pumpkinColor = pumpkinColor;
+  }
+
+  public void setPumpkinStartHeight( int newHeightInPixels ){
+    this.y = newHeightInPixels;
+  }
+  
+  public void moveRight( int speed ){
+    this.xSpeed = speed;
+  }
+  
+  public void moveLeft( int speed ){
+    this.xSpeed = -speed;
   }
 
   void draw(boolean bounce) {
@@ -27,6 +41,15 @@ public class Pumpkin {
       }
     }
 
+    this.x += xSpeed;
+    
+    if( this.x > width + this.pmpkinSizePixels ){
+      this.x = 0 - this.pmpkinSizePixels;
+    }
+    if( this.x < 0 - this.pmpkinSizePixels ){
+      this.x = width;
+    }
+
     ellipseMode(CENTER);
 
     // Black outline
@@ -39,7 +62,7 @@ public class Pumpkin {
 
     // Draw body
     fill(pumpkinColor);
-    ellipse(x, y, 150, 150);
+    ellipse(x, y, this.pmpkinSizePixels, this.pmpkinSizePixels);
 
     // Set glowing eyes
     fill(glowingEyesColor, random(200) + 50 );  

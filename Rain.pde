@@ -10,6 +10,10 @@ public class Rain {
     }
     initialized = true;
   }
+  
+  void setAmountOfRain(int rain){
+    this.amountOfRain = rain;
+  }
 
   void draw(int rainColor) {
     push();

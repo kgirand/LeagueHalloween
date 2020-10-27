@@ -22,7 +22,7 @@ void setup() {
   // 2. Set the size of your sketch to at least 600, 400
   
   // 3. Pick a scary house and initialize it using loadImage,
-  //    example: loadImage("scaryHouse1.jpg");
+  //    example: scaryHouse = loadImage("scaryHouse1.jpg");
   
   // 4. Resize your scary house to the window size using
   //    scaryHouse.resize(width, height);
@@ -40,8 +40,10 @@ void draw() {
   
   // 6. Call the drawFloor method
   
-  // 7. Call pumpkin1.draw() to draw a pumpkin.
-  //    Can you make the pumpkin bounce?
+  // 7. Call pumpkin1.draw(false) to draw a pumpkin.
+  //    Can you figure out how to make the pumpkin bounce by changing
+  //    the input parameter when calling draw()?
+  //
   //    Make at least 2 more new pumpkins. To do this, create new pumpkin 
   //    variables above the setup() method and then initialize them
   //    in setup(). Call their draw() methods here and they should appear!
@@ -54,8 +56,9 @@ void draw() {
   
   // 9. Call rainfall.draw( <rainColor> ) to add rain
   
-  // 10. Call lightning.draw() to draw some lightning;
-  //     Can you make lightning crash when you press a mouse button?
+  // 10. Call lightning.draw(false) to draw some lightning;
+  //     Can you make lightning crash when the mouse is pressed
+  //     by changing the input parameter to lightning.draw()?
   
   // 11. Display "Happy Halloween" somewhere on your display.
   
