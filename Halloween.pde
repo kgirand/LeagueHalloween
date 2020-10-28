@@ -44,13 +44,19 @@ void setup() {
   pumpkin2 = new Pumpkin(150, #F71B44);
   pumpkin3 = new Pumpkin(550, #F7ED1B);
   pumpkin4 = new Pumpkin(750, #34282A);
-  ghost1 = new Ghost(200, 10, "left");
-  ghost2 = new Ghost(100, 7, "right");
-  ghost3 = new Ghost(10, 5, "left");
-
+  
   pumpkin1.setPumpkinStartHeight(200);
   pumpkin2.setPumpkinStartHeight(300);
   pumpkin3.setPumpkinStartHeight(400);
+  
+  ghost1 = new Ghost(200, 10, "left");
+  ghost2 = new Ghost(100, 7, "right");
+  ghost3 = new Ghost(10, 5, "left");
+  
+  ghost1.setGhostTransparency(0);
+  ghost2.setGhostTransparency(50);
+  ghost3.setGhostTransparency(90);
+  
   rainfall = new Rain();
   lightning = new Lightning();
   spotlight = new Spotlight();
@@ -67,9 +73,9 @@ void draw() {
   // 7. Call pumpkin1.draw() to draw a pumpkin. Can you make the pumpkin bounce?
   //    Make at least 2 more new pumpkins.
   if ( mouseX > width/2 ) {
-    pumpkin1.moveRight(1);
+    pumpkin1.moveRight(2);
   } else {
-    pumpkin1.moveLeft(1);
+    pumpkin1.moveLeft(2);
   }
   pumpkin1.setPumpkinColor( color( random(256), random(256), random(256) ) );
   pumpkin1.draw(true);
@@ -79,9 +85,6 @@ void draw() {
 
   // 8. Call ghost1.draw() to draw a ghost.
   //    Make at least 2 more new ghosts to fly across the screen
-  ghost1.setGhostTransparency(0);
-  ghost2.setGhostTransparency(50);
-  ghost3.setGhostTransparency(90);
   ghost1.draw();
   ghost2.draw();
   ghost3.draw();
@@ -126,8 +129,21 @@ void draw() {
 
 
 
-  // There is a hidden spotlight feature in this recipe.
-  // See if you can figure out how to initialize and use it....
+  // There are hidden spotlight and grayscale features in this
+  // recipe. See if you can figure out how to use them...
+  
+  // ---------------------------------------------------------
+  // Here are some other methods you can try:
+  //  pumpkin1.setPumpkinColor();
+  //  pumpkin1.setPumpkinStartHeight();
+  //  pumpkin1.moveRight();
+  //  pumpkin1.moveLeft();
+  //  ghost1.setGhostTransparency();
+  //  lightning.setLightningFlash();
+  //  rainfall.setAmountOfRain();
+  //  spotlight.setPixelSize();
+  //  spotlight.setSpotlightSize();
+  // ---------------------------------------------------------
   spotlight.setPixelSize( spotlightPixelSize );
   spotlight.setSpotlightSize( spotlightSize );
 
