@@ -16,8 +16,10 @@ public class Ghost {
     this.y = y;
   }
   
+  // 0 = most transparent; 100 = most opaque
   public void setGhostTransparency( int transparency ){
-    this.transparency = transparency;
+    // Normalize value from 0-255
+    this.transparency = ( 255 - ( ( transparency * 255 ) / 100 ) );
   }
 
   void draw() {

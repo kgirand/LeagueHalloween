@@ -20,7 +20,7 @@ public class Pumpkin {
   }
 
   // ---------------------------------------------------------
-  // Use this method in setup() method,
+  // Call this method from the setup() method,
   // NOT the draw() method
   // ---------------------------------------------------------
   public void setPumpkinStartHeight( int newHeightInPixels ){

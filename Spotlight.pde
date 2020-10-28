@@ -23,10 +23,14 @@ public class Spotlight {
     }
   }
 
+  // Sets how pixelated the spotlight view is; 1 to 9
+  // 1 = no pixelization
+  // 9 = high pixelization (large pixels)
   public void setPixelSize( int sizePixels ) {
     this.pixelSize = sizePixels;
   }
 
+  // Sets the spotlight ellipse size
   public void setSpotlightSize( int sizePixels ) {
     this.spotlightSizePixels = sizePixels;
   }

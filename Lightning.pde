@@ -16,7 +16,9 @@ public class Lightning {
     }
   }
 
-  // Draw lightning at random times
+  // Draw lightning at random times.
+  //   smaller input = more frequent lightning
+  //   larger input  = less frequent lightning
   void draw( int randDelay ) {
     if ( random( randDelay ) < 5 ) {
       drawLightning();

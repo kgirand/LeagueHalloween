@@ -87,8 +87,8 @@ void draw() {
   
   
   
-  // There is a hidden spotlight feature in this recipe.
-  // See if you can figure out how to use it...
+  // There are hidden spotlight and grayscale features in this
+  // recipe. See if you can figure out how to use them...
   
   // ---------------------------------------------------------
   // Here are some other methods you can try:
@@ -114,3 +114,10 @@ void drawFloor(){
   
   pop();
 } //<>//
+
+// Call this method at the very bottom of the draw() method!
+void drawGrayscale( boolean grayscaleEnabled ){
+  if( grayscaleEnabled ){
+    filter( GRAY  );    
+  }
+}
