@@ -19,6 +19,10 @@ public class Pumpkin {
     this.pumpkinColor = newColor;
   }
 
+  // ---------------------------------------------------------
+  // Use this method in setup() method,
+  // NOT the draw() method
+  // ---------------------------------------------------------
   public void setPumpkinStartHeight( int newHeightInPixels ){
     this.y = newHeightInPixels;
   }

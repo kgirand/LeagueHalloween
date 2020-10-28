@@ -1,7 +1,10 @@
 /***********  SOUND ***************
  * Some computers are unable to play sounds. 
  * If you cannot play sound on this computer, set canPlaySounds to false.
- * If you are not sure, ask your teacher 
+ * To install ddf.minim:
+ * 1. go to 'Tools' -> Add Tool -> select the 'Libraries' tab
+ * 2. In the search box type 'minim'.
+ * 3. Install 'Minin | An audio library...'
  * *****************/
 boolean canPlaySound = true;
 
@@ -15,7 +18,7 @@ Ghost ghost1;
 
 // ---------------------------------------------------------
 // 1. Make a PImage variable for the scary house background
-//    example: PImage scaryHosue
+//    example: PImage scaryHouse
 // ---------------------------------------------------------
 
 
