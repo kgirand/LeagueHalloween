@@ -1,23 +1,43 @@
 public class Spotlight {
-  ArrayList<Pixel> pixelList;
-  int pixelSize = 4;
-  int spotlightSizePixels = 200;
+  private ArrayList<Pixel> pixelList;
+  private int pixelSize = 4;
+  private int spotlightSizePixels = 150;
+  private PImage darkness = null;
+  private PGraphics spotlightMask = null;
 
   public Spotlight() {
-    pixelList = new ArrayList<Pixel>();    
+    // Arraylist for pixelization
+    pixelList = new ArrayList<Pixel>();
+
+    // Foreground darkness image
+    darkness = createImage(width, height, RGB);
+    darkness.loadPixels();
+    for ( int i = 0; i < darkness.pixels.length; i++ ) {
+      darkness.pixels[i] = 0;
+    }
+    darkness.updatePixels();
+
+    // Ellipse mask for spotlight through darkness with no pixel distortion
+    if ( spotlightMask == null ) {
+      spotlightMask = createGraphics(width, height);
+    }
   }
   
-  public void setPixelSize( int sizePixels ){
+  // Sets how pixelated the spotlight view is; 1 to 9
+  // 1 = no pixelization
+  // 9 = high pixelization (large pixels)
+  public void setPixelSize( int sizePixels ) {
     this.pixelSize = sizePixels;
   }
-  
-  public void setSpotlightSizePixels( int sizePixels ){
+
+  // Sets the spotlight ellipse size
+  public void setSpotlightSize( int sizePixels ) {
     this.spotlightSizePixels = sizePixels;
   }
-  
-  void initializePixels(){
-    for( int i = 0; i < width; i += pixelSize ) {
-      for( int j = 0; j < height; j+= pixelSize ) {
+
+  void initializePixels() {
+    for ( int i = 0; i < width; i += pixelSize ) {
+      for ( int j = 0; j < height; j+= pixelSize ) {
         color c = get(i, j);
         pixelList.add( new Pixel(i, j, pixelSize, c) );
       }
@@ -26,20 +46,48 @@ public class Spotlight {
 
   void draw() {
     push();
-    
-    if( pixelList.isEmpty() ){
+
+    if ( pixelList.isEmpty() ) {
       initializePixels();
     }
-    
-    background(0);
-    
-    for (int m = 0; m < pixelList.size (); m++) {
-      Pixel p = (Pixel) pixelList.get(m);
-      p.draw();
+
+    if ( pixelSize > 1 ) {
+      // If pixelating
+
+      background(0);
+
+      for (int m = 0; m < pixelList.size (); m++) {
+        Pixel p = (Pixel) pixelList.get(m);
+        p.draw();
+      }
+
+      pixelList.clear();
+    } else { 
+      // Not pixelating, use a normal spotlight with no pixel distortion
+
+      // Get current frame before draing darkness
+      PImage currentFrame = get();
+      
+      image(darkness, 0, 0);
+
+      spotlightMask.beginDraw();
+
+      // Erase previously drawn graphics
+      spotlightMask.background(0);
+      spotlightMask.noStroke();
+
+      // Ellipse mask with fuzzy edges
+      for (int i=0; i<25; i++) {
+        spotlightMask.fill(0+i*10);
+        spotlightMask.ellipse(mouseX, mouseY, (2 * spotlightSizePixels) - (i * 2), (2 * spotlightSizePixels) - (i * 2));
+      }
+
+      spotlightMask.endDraw();
+
+      currentFrame.mask(spotlightMask);
+      image(currentFrame, 0, 0);
     }
-    
-    pixelList.clear();
-    
+
     pop();
   }
 
@@ -59,25 +107,20 @@ public class Spotlight {
     void draw() {
       float xm, ym;
       float sizePixels = spotlightSizePixels * spotlightSizePixels;
-      
-      if( ( (x - mouseX) * (x - mouseX) ) + ( (y - mouseY) * (y - mouseY) ) <= sizePixels ) {
+
+      if ( ( (x - mouseX) * (x - mouseX) ) + ( (y - mouseY) * (y - mouseY) ) <= sizePixels ) {
         xm = x + random(-1, 1);
         ym = y + random(-1, 1);
-        
+
         if (xm > width || xm < 0) {
           xm = -xm;
         }
         if (ym> height || ym<0) {
           ym = -ym;
         }
-        
-        if( pixelSize > 1 ){
-          fill(this.pixelColor); 
-          rect(xm, ym, pixelSize, pixelSize);
-        } else {
-          stroke(this.pixelColor); 
-          point(xm, ym);
-        }
+
+        fill(this.pixelColor); 
+        rect(xm, ym, pixelSize, pixelSize);
       }
     }
   }

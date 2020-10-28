@@ -1,11 +1,13 @@
 public class Pumpkin {
-  int x;
-  int y;
-  int bounceSpeed = 0;
-  int gravity = 1;
-  int pumpkinColor;
-  int glowingEyesColor = color(240 + random(15), 240 + random(15), random(255));
-  int greenStemColor = #2EA22C;
+  private int x;
+  private int y;
+  private int xSpeed = 0;
+  private int bounceSpeed = 0;
+  private int gravity = 1;
+  private int pumpkinColor;
+  private int pumpkinSizePixels = 150;
+  private int glowingEyesColor = color(240 + random(15), 240 + random(15), random(255));
+  private int greenStemColor = #2EA22C;
 
   public Pumpkin( int x, int pumpkinColor ) {
     this.x = x;
@@ -13,18 +15,47 @@ public class Pumpkin {
     this.pumpkinColor = pumpkinColor;
   }
 
-  void draw(boolean bounce) {
+  public void setPumpkinColor( int newColor ){
+    this.pumpkinColor = newColor;
+  }
+
+  // ---------------------------------------------------------
+  // Call this method from the setup() method,
+  // NOT the draw() method
+  // ---------------------------------------------------------
+  public void setPumpkinStartHeight( int newHeightInPixels ){
+    this.y = newHeightInPixels;
+  }
+  
+  public void moveRight( int speed ){
+    this.xSpeed = speed;
+  }
+  
+  public void moveLeft( int speed ){
+    this.xSpeed = -speed;
+  }
+
+  public void draw(boolean bounce) {
     push(); 
 
     bounceSpeed += gravity;
     y += bounceSpeed ;
 
-    if (y > height - 100) {
-      y = height - 100;
+    if (this.y > height - 100) {
+      this.y = height - 100;
 
       if ( bounce ) {
         bounceSpeed = -bounceSpeed;
       }
+    }    
+    
+    this.x += xSpeed;
+    
+    if( this.x > width + this.pumpkinSizePixels ){
+      this.x = 0 - this.pumpkinSizePixels;
+    }
+    if( this.x < 0 - this.pumpkinSizePixels ){
+      this.x = width;
     }
 
     ellipseMode(CENTER);
@@ -35,11 +66,11 @@ public class Pumpkin {
 
     // Draw top stem
     fill(greenStemColor);
-    rect(x - 10, y - 90, 15, 20);
+    rect(x - 10, y - (pumpkinSizePixels/2) - 20, 15, 20);
 
     // Draw body
     fill(pumpkinColor);
-    ellipse(x, y, 150, 150);
+    ellipse(x, y, pumpkinSizePixels, pumpkinSizePixels);
 
     // Set glowing eyes
     fill(glowingEyesColor, random(200) + 50 );  

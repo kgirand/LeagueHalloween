@@ -1,44 +1,32 @@
-import ddf.minim.*;
-Minim minim = new Minim(this); 
-
 public class Lightning {
-  float chaos = 0.25;
-  ArrayList<PVector> points;
-  AudioPlayer thunder = null;
-  boolean lightningFlash = false;
+  private float chaos = 0.25;
+  private ArrayList<PVector> points;
+  private boolean lightningFlash = true;
 
-  void playThunder() {
-    if( canPlaySound ){
-       if (this.thunder == null) {
-           this.thunder = minim.loadFile("thunder.wav");
-       }
-       if( ! this.thunder.isPlaying() ){
-         this.thunder.loop();
-       }
-    }
-  }
-  
-  void setLightningFlash(boolean flash){
+  // Inverts colors when lightning crashes
+  void setLightningFlash(boolean flash) {
     this.lightningFlash = flash;
   }
 
-  void draw(boolean lightningWhenMousePressed) {
-    playThunder();
-    
-    if (lightningWhenMousePressed ) {
-      if ( mousePressed ) {
-        drawLightning();
-        
-        if( this.lightningFlash ){
-          filter(INVERT);
-        }
-      }
-    } else if( random( 200 ) < 5 ) {
+  // Draw lightning immediately when called
+  void draw() {
+    drawLightning();
+
+    if ( this.lightningFlash ) {
+      filter(INVERT);
+    }
+  }
+
+  // Draw lightning at random times.
+  //   smaller input = more frequent lightning
+  //   larger input  = less frequent lightning
+  void draw( int randDelay ) {
+    if ( random( randDelay ) < 5 ) {
       drawLightning();
-      
-        if( this.lightningFlash ){
-          filter(INVERT);
-        }
+
+      if ( this.lightningFlash ) {
+        filter(INVERT);
+      }
     }
   }
 

@@ -1,9 +1,10 @@
 public class Ghost {
-  PImage ghostImg;
-  String direction;
-  int x;
-  int y;
-  int speed = 5;
+  private PImage ghostImg;
+  private String direction;
+  private int x;
+  private int y;
+  private int speed = 5;
+  private int transparency = 125;
 
   public Ghost(int y, int speed, String direction) {
     ghostImg = loadImage( "ghost.png" );
@@ -14,12 +15,18 @@ public class Ghost {
     this.x = -ghostImg.width;
     this.y = y;
   }
+  
+  // 0 = most transparent; 100 = most opaque
+  public void setGhostTransparency( int transparency ){
+    // Normalize value from 0-255
+    this.transparency = ( 255 - ( ( transparency * 255 ) / 100 ) );
+  }
 
   void draw() {
     push();
 
     // Makes ghost transparent
-    tint(255, 125);
+    tint(255, this.transparency);
     
     if( direction.equalsIgnoreCase("left") ){
       // Ghost goes right to left

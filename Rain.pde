@@ -1,11 +1,33 @@
+import ddf.minim.*;
+Minim minim = new Minim(this); 
+
 public class Rain {
+  private static final int MAX_RAIN_DROPS = 1000;
   private int amountOfRain = 350;
+  private AudioPlayer rainSounds = null;
   private ArrayList<Raindrop> drop = new ArrayList<Raindrop>(amountOfRain);
   private ArrayList<Splash> splash = new ArrayList<Splash>();
   private boolean initialized = false;
 
+  void playRainSounds() {
+    if ( canPlaySound ) {
+      if (this.rainSounds == null) {
+        this.rainSounds = minim.loadFile("thunder.wav");
+      }
+      if ( ! this.rainSounds.isPlaying() ) {
+        this.rainSounds.loop();
+      }
+    }
+  }
+
+  void setAmountOfRain(int rain){
+    if( rain > 0 && rain < MAX_RAIN_DROPS ){
+      this.amountOfRain = rain;
+    }
+  }
+
   void setup() {
-    for (int i = 0; i < amountOfRain; i++) {
+    for (int i = 0; i < MAX_RAIN_DROPS; i++) {
       drop.add( new Raindrop() );
     }
     initialized = true;
@@ -13,6 +35,8 @@ public class Rain {
 
   void draw(int rainColor) {
     push();
+    
+    playRainSounds();
 
     if ( !initialized ) {
       this.setup();
@@ -21,7 +45,7 @@ public class Rain {
     stroke(255, 200);
     strokeWeight(1.8);
 
-    for (int i = 0; i < drop.size(); i++) {
+    for (int i = 0; i < this.amountOfRain; i++) {
       drop.get(i).draw(rainColor);
       drop.get(i).fall();
       if (drop.get(i).y >= height) {
